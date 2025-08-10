@@ -18,38 +18,41 @@
 ---
 ## โครงสร้างโฟลเดอร์ (Tree View)
 ```
+## 📂 โครงสร้างโฟลเดอร์
+
+```plaintext
 lib/
-	main.dart                     # จุดเริ่มรันแอป (ProviderScope)
-	src/
-		app/
-			app.dart                  # ตัว MaterialApp.router หลัก
-		config/
-			theme.dart                # Theme (Material 3 / ColorScheme)
-		core/
-			constants/                # ค่าคงที่ (route names, keys, etc.)
-			errors/                   # Failure / Exception mapping
-			utils/                    # Utilities (logger, formatters, etc.)
-		features/
-			home/
-				domain/
-					entities/            # Entity บริสุทธิ์ (Pure Dart)
-					repositories/        # Abstract repository interfaces
-					usecases/            # Use case (1 class = 1 business action)
-				data/
-					datasources/         # Remote / Local data source (API, DB)
-					models/              # DTO / Model สำหรับแปลง JSON <-> Entity
-					repositories/        # Implement repository (เรียก datasource)
-				presentation/
-					pages/
-						home_page.dart     # หน้า Home (UI)
-					providers/
-						counter_provider.dart # ตัวอย่าง StateNotifier + Provider
-					widgets/             # Widgets ย่อยที่ใช้เฉพาะ feature นี้
-		l10n/                      # ไฟล์ localization (ARB)
-		routing/
-			app_router.dart          # GoRouter + route tree
-		services/                  # Services ทั่วไป (storage, analytics, etc.)
-		shared/                    # Widgets/Providers ที่ใช้ข้ามหลาย feature
+├── main.dart                      # จุดเริ่มรันแอป (ProviderScope)
+└── src
+    ├── app
+    │   └── app.dart               # MaterialApp.router หลักของแอป
+    ├── config
+    │   └── theme.dart             # Theme (Material 3 / ColorScheme)
+    ├── core
+    │   ├── constants              # ค่าคงที่ เช่น route names, keys
+    │   ├── errors                 # การจัดการข้อผิดพลาด / Failure mapping
+    │   └── utils                  # Utilities เช่น logger, formatters
+    ├── features
+    │   └── home
+    │       ├── data
+    │       │   ├── datasources    # Data source (API, Local DB)
+    │       │   ├── models         # DTO / Model สำหรับ JSON <-> Entity
+    │       │   └── repositories   # Implement repository (เรียก datasource)
+    │       ├── domain
+    │       │   ├── entities       # Entity บริสุทธิ์ (Pure Dart)
+    │       │   ├── repositories   # Interface repository
+    │       │   └── usecases       # Use case (1 action ต่อ 1 class)
+    │       └── presentation
+    │           ├── pages
+    │           │   └── home_page.dart      # UI หน้า Home
+    │           ├── providers
+    │           │   └── counter_provider.dart # StateNotifier/Provider
+    │           └── widgets        # Widgets เฉพาะของ feature นี้
+    ├── l10n                       # Localization (.arb)
+    ├── routing
+    │   └── app_router.dart        # GoRouter + route tree
+    ├── services                   # Services กลาง เช่น storage, analytics
+    └── shared                     # Widgets/Providers ที่ใช้ข้ามหลาย feature
 ```
 
 ---
