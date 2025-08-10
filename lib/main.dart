@@ -1,8 +1,9 @@
+// main.dart
+// Entry point: ใช้ RootApp (demo sidebar + mini apps) แยกจากโครง clean architecture เดิม
+// หากต้องการกลับไปใช้โครงก่อนหน้า ให้ปรับให้ runApp เป็น NoppakaoApp ตามไฟล์ app.dart เดิม
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'src/app/app.dart';
+import 'app.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  runApp(const ProviderScope(child: NoppakaoApp()));
+void main() {
+  runApp(const RootApp());
 }
