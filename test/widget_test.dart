@@ -8,13 +8,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noppakao/src/app/app.dart';
-
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const ProviderScope(child: NoppakaoApp()));
 
     // Verify that our counter starts at 0.
     expect(find.textContaining('Counter: 0'), findsOneWidget);

@@ -1,6 +1,6 @@
 // page_b.dart - Tab B ของ Mini App 1
 import 'package:flutter/material.dart';
-import 'package:noppakao/services/notification_service.dart';
+import 'package:noppakao/mini_apps/app1/services/notification_service.dart';
 
 class Setting extends StatefulWidget {
   const Setting({super.key});

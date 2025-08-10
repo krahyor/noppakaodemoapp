@@ -4,7 +4,7 @@
 import 'package:flutter/material.dart';
 import 'pages/accounts.dart';
 import 'pages/settings.dart';
-import 'package:noppakao/services/notification_service.dart';
+import 'package:noppakao/mini_apps/app1/services/notification_service.dart';
 
 class App1Shell extends StatefulWidget {
   const App1Shell({super.key});
