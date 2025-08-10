@@ -13,6 +13,8 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+        // ปิดใช้งานเพื่อให้โค้ดที่ใช้ API ใหม่ของ Java ทำงานได้บน Android รุ่นเก่ากว่า (ตาม minSdk) โดยใช้ไลบรารี desugar_jdk_libs แทนการพึ่งพา runtime จริงของเครื่อง.
+        isCoreLibraryDesugaringEnabled = true
     }
 
     kotlinOptions {
@@ -41,4 +43,8 @@ android {
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
 }

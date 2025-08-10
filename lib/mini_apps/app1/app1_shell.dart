@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'pages/accounts.dart';
 import 'pages/settings.dart';
+import 'package:noppakao/services/notification_service.dart';
 
 class App1Shell extends StatefulWidget {
   const App1Shell({super.key});
@@ -15,6 +16,13 @@ class App1Shell extends StatefulWidget {
 class _App1ShellState extends State<App1Shell> {
   int _currentIndex = 0;
   late final List<Widget> _tabs = const [Account(), Setting()];
+
+  @override
+  void initState() {
+    super.initState();
+    // Lazy init notifications only for app1
+    NotificationService().ensureInitialized();
+  }
 
   @override
   Widget build(BuildContext context) {

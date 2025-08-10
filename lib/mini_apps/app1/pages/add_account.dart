@@ -1,7 +1,7 @@
 // page_c.dart - Tab C ของ Mini App 1
 import 'package:flutter/material.dart';
 import 'package:noppakao/app.dart';
-import 'package:noppakao/mini_apps/app1/app1_shell.dart';
+import 'package:noppakao/services/notification_service.dart';
 import 'package:noppakao/mini_apps/app1/models/accounts.dart';
 
 class AddAccount extends StatefulWidget {
@@ -132,6 +132,10 @@ class _AddAccountState extends State<AddAccount> {
                           password: _password,
                           role: _role,
                         ),
+                      );
+                      NotificationService().showNewAccountNotification(
+                        fullName: '$_firstname $_lastname',
+                        email: _email,
                       );
                       Navigator.pushReplacement(
                         context,
