@@ -1,31 +1,28 @@
-// page_c.dart - Tab C ของ Mini App 1
 import 'package:flutter/material.dart';
+import 'package:noppakao/mini_apps/app2/models/students.dart';
 import 'package:noppakao/app.dart';
-import 'package:noppakao/mini_apps/app1/services/notification_service.dart';
-import 'package:noppakao/mini_apps/app1/models/accounts.dart';
 
-class AddAccount extends StatefulWidget {
-  const AddAccount({super.key});
+class FormScore extends StatefulWidget {
+  const FormScore({super.key});
 
   @override
-  State<AddAccount> createState() => _AddAccountState();
+  State<FormScore> createState() => _FormScoreState();
 }
 
-class _AddAccountState extends State<AddAccount> {
+class _FormScoreState extends State<FormScore> {
   final _formKey = GlobalKey<FormState>();
-
-  Role _role = Role.user;
-  String _firstname = '';
-  String _lastname = '';
+  final int _score = 0;
+  String _studentId = '';
   String _email = '';
-  String _password = '';
+  String _firstName = '';
+  String _lastName = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Add Account")),
+      appBar: AppBar(title: const Text('Form Score')),
       body: Padding(
-        padding: const EdgeInsets.all(15),
+        padding: EdgeInsets.all(10),
         child: Form(
           key: _formKey,
           child: SingleChildScrollView(
@@ -33,47 +30,28 @@ class _AddAccountState extends State<AddAccount> {
               children: [
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: 'First Name',
+                    labelText: "Student ID",
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your first name';
+                      return 'กรุณากรอก Student ID';
                     }
                     return null;
                   },
                   onSaved: (value) {
-                    _firstname = value!;
+                    _studentId = value!;
                   },
                 ),
                 SizedBox(height: 10),
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: 'Last Name',
+                    labelText: "อีเมล",
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your last name';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    _lastname = value!; // Save the last name
-                  },
-                ),
-                SizedBox(height: 10),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter a valid email';
-                    }
-                    if (!value.contains('@')) {
-                      return 'รูปแบบอีเมลไม่ถูกต้อง';
+                      return 'กรุณากรอกอีเมล';
                     }
                     return null;
                   },
@@ -84,57 +62,70 @@ class _AddAccountState extends State<AddAccount> {
                 SizedBox(height: 10),
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: 'Password',
+                    labelText: 'ชื่อ',
                     border: OutlineInputBorder(),
                   ),
-                  obscureText: true,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter a password';
+                      return 'กรุณากรอกชื่อ';
                     }
                     return null;
                   },
                   onSaved: (value) {
-                    _password = value!;
+                    _firstName = value!;
                   },
                 ),
                 SizedBox(height: 10),
-                DropdownButtonFormField(
-                  value: _role,
+                TextFormField(
                   decoration: InputDecoration(
-                    labelText: 'ดำแหน่ง',
+                    labelText: 'นามสกุล',
                     border: OutlineInputBorder(),
                   ),
-                  items:
-                      Role.values.map((key) {
-                        return DropdownMenuItem(
-                          value: key,
-                          child: Text(key.title),
-                        );
-                      }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      _role = value!;
-                    });
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'กรุณากรอกนามสกุล';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _lastName = value!;
                   },
                 ),
+                SizedBox(height: 10),
+                TextFormField(
+                  decoration: InputDecoration(
+                    labelText: 'คะแนน (1-100)',
+                    border: OutlineInputBorder(),
+                  ),
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'กรุณากรอกคะแนน';
+                    }
+                    final score = int.tryParse(value);
+                    if (score == null) {
+                      return 'กรุณากรอกตัวเลขเท่านั้น';
+                    }
+                    if (score < 1 || score > 100) {
+                      return 'คะแนนต้องอยู่ระหว่าง 1-100';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () {
-                    if (_formKey.currentState != null &&
-                        _formKey.currentState!.validate()) {
+                    if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
-                      accounts.add(
-                        Accounts(
-                          firstName: _firstname,
+                      // Here you can handle the saved data
+                      data.add(
+                        Student(
+                          studentId: _studentId,
                           email: _email,
-                          lastName: _lastname,
-                          password: _password,
-                          role: _role,
+                          firstName: _firstName,
+                          lastName: _lastName,
+                          score: _score,
                         ),
-                      );
-                      NotificationService().showNewAccountNotification(
-                        fullName: '$_firstname $_lastname',
-                        email: _email,
                       );
                       Navigator.pushReplacement(
                         context,
@@ -143,8 +134,9 @@ class _AddAccountState extends State<AddAccount> {
                         ),
                       );
                     }
+                    // Handle form submission
                   },
-                  child: Text('Add Account'),
+                  child: Text('บันทึก'),
                 ),
               ],
             ),
