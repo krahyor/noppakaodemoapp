@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "150686351385",
+    "project_id": "projectdemo-2c207",
+    "storage_bucket": "projectdemo-2c207.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150686351385:android:6d7aa799e160065a4f6a88",
+        "android_client_info": {
+          "package_name": "com.example.noppakao"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnaje9ZB9l50IEhdPcOIoJiKN1WmadYUE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,7 +1,6 @@
 // page_x.dart - Tab X ของ Mini App 2
 import 'package:flutter/material.dart';
 import 'package:noppakao/mini_apps/app2/models/students.dart';
-import 'package:noppakao/mini_apps/app2/pages/form_scores.dart';
 
 class Students extends StatelessWidget {
   const Students({super.key});
@@ -22,21 +21,6 @@ class Students extends StatelessWidget {
       appBar: AppBar(title: const Text('Student')),
       body: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton.icon(
-                icon: const Icon(Icons.add),
-                label: const Text('Add Student'),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const FormScore()),
-                  );
-                },
-              ),
-            ],
-          ),
           Expanded(
             child: ListView.builder(
               itemCount: data.length,

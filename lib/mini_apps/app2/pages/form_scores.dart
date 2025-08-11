@@ -1,5 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:noppakao/mini_apps/app2/models/students.dart';
 import 'package:noppakao/app.dart';
 
 class FormScore extends StatefulWidget {
@@ -10,8 +10,10 @@ class FormScore extends StatefulWidget {
 }
 
 class _FormScoreState extends State<FormScore> {
+  final CollectionReference _studentCollection = FirebaseFirestore.instance
+      .collection("students");
   final _formKey = GlobalKey<FormState>();
-  final int _score = 0;
+  int _score = 0;
   String _studentId = '';
   String _email = '';
   String _firstName = '';
@@ -111,23 +113,26 @@ class _FormScoreState extends State<FormScore> {
                     }
                     return null;
                   },
+                  onSaved: (value) {
+                    _score = int.parse(value!);
+                  },
                 ),
                 SizedBox(height: 10),
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       // Here you can handle the saved data
-                      data.add(
-                        Student(
-                          studentId: _studentId,
-                          email: _email,
-                          firstName: _firstName,
-                          lastName: _lastName,
-                          score: _score,
-                        ),
-                      );
-                      Navigator.pushReplacement(
+                      await _studentCollection.add({
+                        'first_name': _firstName,
+                        'last_name': _lastName,
+                        'email': _email,
+                        'student_id': _studentId,
+                        'score': _score,
+                      });
+                      _formKey.currentState!.reset();
+
+                      await Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                           builder: (context) => const RootApp(),

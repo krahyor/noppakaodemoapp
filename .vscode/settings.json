@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "/home/nopphakao/Documents/education-study/app/lengthlong/noppakao/linux"
+    "cmake.sourceDirectory": "/home/nopphakao/Documents/education-study/app/lengthlong/noppakao/linux",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
